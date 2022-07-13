@@ -121,7 +121,7 @@ Summary: The Linux kernel
 #  to build the base kernel using the debug configuration. (Specifying
 #  the --with-release option overrides this setting.)
 %define debugbuildsenabled 0
-# define buildid .local
+%define buildid .enarx
 %define specversion 5.19.0
 %define patchversion 5.19
 %define pkgrelease 0.rc7.20220721git353f7988dd84.55
@@ -554,6 +554,7 @@ License: GPLv2 and Redistributable, no modification permitted
 URL: https://www.kernel.org/
 Version: %{specversion}
 Release: %{pkg_release}
+Epoch: 100
 # DO NOT CHANGE THE 'ExclusiveArch' LINE TO TEMPORARILY EXCLUDE AN ARCHITECTURE BUILD.
 # SET %%nobuildarches (ABOVE) INSTEAD
 %if 0%{?fedora}
@@ -861,6 +862,7 @@ Source4002: gating.yaml
 Patch1: patch-%{patchversion}-redhat.patch
 %endif
 
+Patch999998: patch-%{patchversion}-enarx.patch
 # empty final patch to facilitate testing of kernel patches
 Patch999999: linux-kernel-test.patch
 
@@ -1433,6 +1435,7 @@ cp -a %{SOURCE1} .
 %if !%{nopatches}
 
 ApplyOptionalPatch patch-%{patchversion}-redhat.patch
+ApplyOptionalPatch patch-%{patchversion}-enarx.patch
 %endif
 
 ApplyOptionalPatch linux-kernel-test.patch
